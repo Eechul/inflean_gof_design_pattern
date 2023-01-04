@@ -1,13 +1,22 @@
 package org.example.singleton;
 
-public class Settings3 {
+public class Settings4 {
 
-    private static final Settings3 INSTANCE = new Settings3(); // 이른 초기화(eager initialization)을 사용하는 방법
-    private Settings3() { }
+    private static volatile Settings4 instance; // 이 방법은 자바 1.5 이상에서 실행되기 위해 volatile 키워드를 사용해야 한다/
 
-    // thread-safe하다. 멀티 쓰레드라도 미리 만들어진 것만 쓰이기 때문
-    // 이른 초기화 단점: 미리 만든다는것 자체가 단점일 수 있다. 애플리케이션 로딩때 만들게 되는데, 만약 잘 안쓴다면? 메모리 낭비
-    public static Settings3 getInstance() {
-        return INSTANCE;
+    private Settings4() { }
+
+    // null 체크 후, block형태의 synchronized를 통해 다시 한번 체크해준다.(double checked locking)
+    // 단점: volatile 의 이해가 필요. 1.4 이하 버전은 지원하지 않음.
+    // 권장하는 방법은 다음 Setting5 에서.
+    public static Settings4 getInstance() {
+        if (instance == null) {
+            synchronized (Settings4.class) {
+                if (instance == null) {
+                    instance = new Settings4();
+                }
+            }
+        }
+        return instance;
     }
 }

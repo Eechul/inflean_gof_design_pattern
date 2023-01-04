@@ -1,22 +1,19 @@
 package org.example.singleton;
 
-public class Settings4 {
+import java.io.Serializable;
 
-    private static volatile Settings4 instance; // 이 방법은 자바 1.5 이상에서 실행되기 위해 volatile 키워드를 사용해야 한다/
+public class Settings5 implements Serializable { // 싱글톤 패턴 구현 방법 깨트리기 예제를 위한 Serializable
 
-    private Settings4() { }
+    private Settings5() { }
 
-    // null 체크 후, block형태의 synchronized를 통해 다시 한번 체크해준다.(double checked locking)
-    // 단점: volatile 의 이해가 필요. 1.4 이하 버전은 지원하지 않음.
-    // 권장하는 방법은 다음 Setting5 에서.
-    public static Settings4 getInstance() {
-        if (instance == null) {
-            synchronized (Settings4.class) {
-                if (instance == null) {
-                    instance = new Settings4();
-                }
-            }
-        }
-        return instance;
+    // static inner 클래스 사용하기
+    private static class SettingsHolder {
+        private static final Settings5 INSTANCE = new Settings5();
+
+    }
+
+    // 멀티 쓰레드 환경에서 안전, lazy 로딩 가능
+    public static Settings5 getInstance() {
+        return SettingsHolder.INSTANCE;
     }
 }

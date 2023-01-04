@@ -1,16 +1,16 @@
 package org.example.singleton;
 
-public class Settings1 {
+public class Settings2 {
 
-    private static Settings1 instance;
+    private static Settings2 instance;
 
-    private Settings1() { } // 외부에서 생성자를 못 만들게 하기 위해 쓰임
+    private Settings2() { } // 외부에서 생성자를 못 만들게 하기 위해 쓰임
 
-    public static Settings1 getInstance() { // 생성자를 만들지 않으면서 글로벌 접근이 가능하게 하려면 static이 필요하다.
-        // 아래와 같은 방법은 멀티쓰레드 환경에서 안전하지 않다.
-        // if문에서 동시에 쓰레드가 접근한다면 인스턴스는 2개가 생성되기 때문이다.
+    // synchronized 키워드 사용: 이 메서드에 한 번에 하나의 쓰레드만 들어오게끔 만들어줌
+    // 단점: getInstance 메서드를 호출할때 마다 synchronized가 실행되기 때문에 성능이 안좋을 수 있다.
+    public static synchronized Settings2 getInstance() {
         if (instance == null) {
-            instance = new Settings1();
+            instance = new Settings2();
         }
 
         return instance;
