@@ -1,7 +1,6 @@
-package org.example.singleton;
+package org.example._01_singleton;
 
 import java.io.*;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 // 싱글톤 패턴 구현 방법을 꺠트려 사용하는 방법

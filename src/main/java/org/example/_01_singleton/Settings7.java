@@ -1,7 +1,4 @@
-package org.example.singleton;
-
-import java.io.*;
-import java.lang.reflect.InvocationTargetException;
+package org.example._01_singleton;
 
 public enum Settings7 {
     // enum은 리플렉션 불가능, 그래서 유일한 인스턴스 가질 수 있다.

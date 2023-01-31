@@ -1,4 +1,4 @@
-package org.example.singleton;
+package org.example._01_singleton;
 
 import java.io.Serializable;
 

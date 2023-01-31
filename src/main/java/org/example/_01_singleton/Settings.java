@@ -1,4 +1,4 @@
-package org.example.singleton;
+package org.example._01_singleton;
 
 // 권장하는 싱글톤 패턴
 public class Settings {
